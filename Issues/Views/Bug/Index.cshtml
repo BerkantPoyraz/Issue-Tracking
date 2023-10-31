@@ -1,0 +1,40 @@
+﻿@model List<Bug>
+
+<table class="table table-striped">
+    <thead class="table-dark">
+         <tr>
+             <th>Project Name</th>
+             <th>Bug Name</th>
+             <th>Status</th>
+             <th>Details</th>
+         </tr>
+    </thead>
+    <tbody class="table-dark">
+        @foreach (var bug in Model)
+        {
+            <tr>
+                <td>@bug.ProjectName</td>
+                <td>@bug.BugName</td>
+                @{
+                    string statusClass = "";
+                    switch (bug.Status)
+                    {
+                        case Bug.BugStatus.New:
+                            statusClass = "status-new";
+                            break;
+                        case Bug.BugStatus.InProgress:
+                            statusClass = "status-inprogress";
+                            break;
+                        case Bug.BugStatus.Closed:
+                            statusClass = "status-closed";
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                <td class="@statusClass">@bug.Status</td>
+                <td><a class="btn btn-primary" asp-controller="Bug" asp-action="Details" asp-route-id="@bug.BugId">Details</a><link /></td>
+            </tr>
+        }
+    </tbody>
+</table>

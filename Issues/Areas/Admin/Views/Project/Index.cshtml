@@ -1,0 +1,13 @@
+﻿@model Issues.Models.Project;
+
+<div>
+    <div class="text-danger" asp-validation-summary="All"></div>
+</div>
+<form asp-controller="Project" asp-action="Creatproject" method="post">
+    <h1>Project Name</h1>
+   <input type="text" name="ProjectName" class="form-control"/>
+   <h2>Project Description</h2>
+   <textarea name="ProjectDescription" class="form-control" rows="12"></textarea>
+   <br />
+   <input type="submit" value="Project Create" class="btn btn-primary" />
+</form>

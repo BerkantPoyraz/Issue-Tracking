@@ -1,0 +1,51 @@
+﻿@model IEnumerable<IdentityUser>
+@inject UserManager<IdentityUser> _userManager
+
+<div class="text-center my-5">
+    <div class="display-6">Users</div>
+</div>
+
+<div class="btn-link col-md-6">
+    <a class="btn btn-success" asp-action="Create">
+        <i class="fa fa-solid fa-plus"></i>
+        Add User
+    </a>
+</div>
+<br />
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>UserName</th>
+            <th>Roles</th>
+            <th>Operations</th>
+        </tr>
+    </thead>
+    <tbody class="table-dark">
+        @foreach (IdentityUser user in Model)
+        {
+            var userRoles = await _userManager.GetRolesAsync(user);
+            string rolesConcatenated = string.Join(", ", userRoles);
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.UserName</td>
+                <td>
+                    @rolesConcatenated
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn btn-warning rounded-0" asp-action="Update" asp-route-id="@user.UserName">Update</a>
+                        <a class="btn btn btn-primary rounded-0" asp-action="ResetPassword" asp-route-id="@user.UserName">ResetPassword</a>
+                        <form method="post" asp-action="DeleteOneUser">
+                            <input type="hidden" name="UserName" value="@user.UserName">
+                            <button type="submit" class="btn btn-danger rounded-0">
+                                <i class="fa fa-solid fa-trash"></i>
+                                Delete
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
