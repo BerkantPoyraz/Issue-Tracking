@@ -2,14 +2,14 @@
 
 namespace Issues.Models
 {
+    public enum BugStatus
+    {
+        New,
+        InProgress,
+        Closed
+    }
     public class Bug
     {
-        public enum BugStatus
-        {
-            New,
-            InProgress,
-            Closed
-        }
         public int BugId { get; set; }
         public int ProjectId { get; set; }
         public Project Project { get; set; }

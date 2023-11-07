@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Issues.Migrations
+namespace Issue.Migrations
 {
     /// <inheritdoc />
     public partial class init : Migration
@@ -222,11 +222,11 @@ namespace Issues.Migrations
                     BugId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ProjectId = table.Column<int>(type: "int", nullable: false),
-                    ProjectName = table.Column<string>(type: "longtext", nullable: false)
+                    ProjectName = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    BugName = table.Column<string>(type: "longtext", nullable: false)
+                    BugName = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    UserName = table.Column<string>(type: "longtext", nullable: false)
+                    UserName = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     UserId = table.Column<string>(type: "varchar(255)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -257,9 +257,9 @@ namespace Issues.Migrations
                     MessageId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     BugId = table.Column<int>(type: "int", nullable: false),
-                    Messages = table.Column<string>(type: "longtext", nullable: false)
+                    Messages = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    UserName = table.Column<string>(type: "longtext", nullable: false)
+                    UserName = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Time = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
@@ -280,8 +280,8 @@ namespace Issues.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "08c9549e-8800-4cbc-ba89-3a31541d616d", null, "Admin", "ADMIN" },
-                    { "44cddfc4-f5d6-4cdf-8e6d-2e6315c2f71e", null, "User", "USER" }
+                    { "822c00fe-695c-4ca4-84bd-6b6d799f72ab", null, "Admin", "ADMIN" },
+                    { "a61f3f26-cfe8-4a17-9319-a86f7d18874b", null, "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(

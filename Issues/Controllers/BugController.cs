@@ -3,22 +3,21 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Issues.Models;
 using System.Collections.Generic;
 using System.Linq;
-using static Issues.Models.Bug;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
-
+using Issue.ViewModel;
 
 namespace Issues.Controllers
 {
     [Authorize]
     public class BugController : Controller
     {
-        private readonly IssuesTrackingDb _context;
+        private readonly IssueTrackingContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public BugController(IssuesTrackingDb context, IHttpContextAccessor httpContextAccessor)
+        public BugController(IssueTrackingContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _httpContextAccessor = httpContextAccessor;
@@ -129,7 +128,7 @@ namespace Issues.Controllers
             var bug = _context.Bugs.FirstOrDefault(b => b.BugId == bugId);
             if (bug != null)
             {
-                bug.Status = (Bug.BugStatus)Enum.Parse(typeof(Bug.BugStatus), status);
+                bug.Status = (BugStatus)Enum.Parse(typeof(BugStatus), status);
                 _context.SaveChanges();
             }
             return RedirectToAction("Details", new { id = bugId });

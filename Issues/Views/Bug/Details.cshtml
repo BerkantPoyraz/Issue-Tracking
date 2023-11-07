@@ -1,17 +1,21 @@
 ﻿@model Bug
 
 <div class="text-center my-5">
-    <div class="display-6">@Model.BugName Detail</div>
+    <div class="display-6">Detail</div>
 </div>
 
 <div style="display: flex; width: 100%;">
     <div style="flex: 1; margin-right: 10px;">
         <div style="border: 1px solid #ddd; padding: 10px;">
+            <div class="text-left">
+                <h4>Subject:</h4>
+                <div class="display-7">@Model.BugName</div>
+            </div>
             @foreach (var message in Model.Messages)
             {
                 <div style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px;">
                     <p class="fs-5">@message.UserName</p>
-                    <p class="fs-4">@message.Messages</p>
+                    <p>@message.Messages</p>
                     <p class="fs-6">@message.Time</p>
                 </div>
             }
@@ -19,7 +23,7 @@
                 <input type="hidden" name="bugId" value="@Model.BugId" />
                 <div class="form-group">
                     <label asp-for="Messages" class="control-label"></label>
-                    @if (Model.Status == Bug.BugStatus.Closed)
+                    @if (Model.Status == BugStatus.Closed)
                     {
                         <textarea name="messages" class="form-control" rows="10" disabled></textarea>
                     }
@@ -31,7 +35,7 @@
                 </div>
 
                 <div class="form-group">
-                    @if (Model.Status != Bug.BugStatus.Closed)
+                    @if (Model.Status != BugStatus.Closed)
                     {
                         <input type="submit" value="Add Message" class="btn btn-primary" />
                     }
@@ -40,26 +44,26 @@
         </div>
     </div>
     <div style="height: 120px;">
-        <h4 style="height: 40px">Created By: @Model.UserName</h4>
-            <h4 style="height: 40px">Project Name: @Model.ProjectName</h4>
-            <h4 style="height: 40px">Create Time: @Model.CreateTime</h4>
-        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-        {
+        <h5 style="height: 40px">Created By:<b>@Model.UserName</b></h5>
+        <h5 style="height: 40px">Project Name: <b>@Model.ProjectName</b></h5>
+        <h5 style="height: 40px">Create Time: <b>@Model.CreateTime</b></h5>
+            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+            {
             <form asp-action="ChangeStatus" asp-controller="Bug" method="post">
                 <input type="hidden" name="bugId" value="@Model.BugId" />
                 <div class="form-group">
                     <h4><label asp-for="Status" class="control-label">Bug Status:</label></h4>
-                    <select name="status" class="form-control" @if (Model.Status == Bug.BugStatus.Closed)
+                    <select name="status" class="form-control" @if (Model.Status == BugStatus.Closed)
                     {
                         <text>disabled</text>
                     }>
-                        @if (Model.Status == Bug.BugStatus.New)
+                        @if (Model.Status == BugStatus.New)
                         {
                                     <option value="New" selected>New</option>
                                     <option value="InProgress">InProgress</option>
                                     <option value="Closed">Closed</option>
                         }
-                        else if (Model.Status == Bug.BugStatus.InProgress)
+                        else if (Model.Status == BugStatus.InProgress)
                         {
                                     <option value="New">New</option>
                                     <option value="InProgress" selected>InProgress</option>
@@ -74,7 +78,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    @if (Model.Status != Bug.BugStatus.Closed)
+                    @if (Model.Status != BugStatus.Closed)
                     {
                         <input type="submit" value="Change Status" class="btn btn-primary" />
                     }
@@ -86,18 +90,19 @@
             string statusClass = "";
             switch (Model.Status)
             {
-                case Bug.BugStatus.New:
+                case BugStatus.New:
                     statusClass = "status-new";
                     break;
-                case Bug.BugStatus.InProgress:
+                case BugStatus.InProgress:
                     statusClass = "status-inprogress";
                     break;
-                case Bug.BugStatus.Closed:
+                case BugStatus.Closed:
                     statusClass = "status-closed";
                     break;
                 default:
                     break;
             }
+            <hr />
             <h4 style="height: 40px">Bug Status: <span class="@statusClass"></span> @Model.Status</h4>
         }
     </div>

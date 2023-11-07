@@ -9,8 +9,8 @@ namespace Issues.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class ProjectController : Controller
     {
-        private readonly IssuesTrackingDb _context;
-        public ProjectController(IssuesTrackingDb context)
+        private readonly IssueTrackingContext _context;
+        public ProjectController(IssueTrackingContext context)
         {
             _context = context;
         }

@@ -4,13 +4,13 @@ namespace Issues.Models
 {
     public class LoginModel
     {
-        private string? _returnurl;
+        private string _returnurl;
 
         [Required(ErrorMessage = "Name is Required.")]
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
         [Required(ErrorMessage = "Password is Required.")]
-        public string? Password { get; set; }
+        public string Password { get; set; }
 
         public string ReturnUrl 
         { 

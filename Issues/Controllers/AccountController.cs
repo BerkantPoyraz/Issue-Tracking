@@ -31,7 +31,8 @@ namespace Issues.Controllers
                 if (user is not null) 
                 {
                     await _signInManager.SignOutAsync();
-                    if ((await _signInManager.PasswordSignInAsync(user,model.Password,false,false)).Succeeded) 
+                    var res = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
+                    if (res.Succeeded) 
                     {
                         return Redirect(model?.ReturnUrl ?? "/");
                     }

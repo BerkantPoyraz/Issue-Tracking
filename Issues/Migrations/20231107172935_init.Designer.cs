@@ -3,16 +3,19 @@ using System;
 using Issues.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Issues.Migrations
+namespace Issue.Migrations
 {
-    [DbContext(typeof(IssuesTrackingDb))]
-    partial class IssuesTrackingDbModelSnapshot : ModelSnapshot
+    [DbContext(typeof(IssueTrackingContext))]
+    [Migration("20231107172935_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,7 +29,6 @@ namespace Issues.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("BugName")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("CreateTime")
@@ -36,7 +38,6 @@ namespace Issues.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ProjectName")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("Status")
@@ -46,7 +47,6 @@ namespace Issues.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("UserName")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("BugId");
@@ -68,14 +68,12 @@ namespace Issues.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Messages")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("Time")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("UserName")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("MessageId");
@@ -132,13 +130,13 @@ namespace Issues.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "44cddfc4-f5d6-4cdf-8e6d-2e6315c2f71e",
+                            Id = "a61f3f26-cfe8-4a17-9319-a86f7d18874b",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "08c9549e-8800-4cbc-ba89-3a31541d616d",
+                            Id = "822c00fe-695c-4ca4-84bd-6b6d799f72ab",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

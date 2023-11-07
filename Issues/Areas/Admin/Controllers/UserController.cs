@@ -61,7 +61,7 @@ namespace Issues.Areas.Admin.Controllers
             return View();
         }
 
-        public async Task<IActionResult> ResetPassword([FromRoute(Name = "id")] string id)
+        public IActionResult ResetPassword([FromRoute(Name = "id")] string id)
         {
             return View(new ResetPasswordDt()
             {

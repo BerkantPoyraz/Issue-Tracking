@@ -15,8 +15,8 @@
 <table class="table table-striped">
     <thead class="table-dark">
         <tr>
-            <th>Id</th>
-            <th>UserName</th>
+            <th>Username</th>
+            <th>Name,Surname</th>
             <th>Roles</th>
             <th>Operations</th>
         </tr>
@@ -27,8 +27,8 @@
             var userRoles = await _userManager.GetRolesAsync(user);
             string rolesConcatenated = string.Join(", ", userRoles);
             <tr>
-                <td>@user.Id</td>
                 <td>@user.UserName</td>
+                <td>-</td>
                 <td>
                     @rolesConcatenated
                 </td>

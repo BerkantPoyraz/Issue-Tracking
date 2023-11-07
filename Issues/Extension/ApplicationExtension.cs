@@ -9,7 +9,7 @@ namespace Issues.Extension
         public static async void ConfigureDefaultAdminUser(this IApplicationBuilder app)
         {
             const string adminUser = "Admin";
-            const string adminPassword = "Admin+123456";
+            const string adminPassword = "Admin";
 
             //User Manager
             UserManager<IdentityUser> userManager = app

@@ -18,7 +18,7 @@ builder.Services.AddScoped<IAuthService, AuthManager>();
 builder.Services.AddScoped<IServiceManager, ServiceManager>();
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<IssuesTrackingDb>(options =>
+builder.Services.AddDbContext<IssueTrackingContext>(options =>
     options.UseMySql(connectionString, serverVersion));
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
@@ -31,7 +31,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequiredLength = 1;
 })
-    .AddEntityFrameworkStores<IssuesTrackingDb>();
+    .AddEntityFrameworkStores<IssueTrackingContext>();
 
 builder.Services.AddSession(options =>
 {
